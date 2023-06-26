@@ -1,0 +1,14 @@
+﻿<Window
+    x:Class="MobileSandbox.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:MobileSandbox"
+    x:Name="MainWindow"
+    Title="Mobile Sandbox"
+    Width="720"
+    Height="880"
+    CanResize="False"
+    Icon="/Assets/test_icon.ico"
+    WindowStartupLocation="CenterScreen">
+	<local:MainView />
+</Window>

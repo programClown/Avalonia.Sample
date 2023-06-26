@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<RuntimeFrameworkVersion>6.0.8</RuntimeFrameworkVersion>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(RunNativeAotCompilation)' == 'true'">
+		<IlcTrimMetadata>true</IlcTrimMetadata>
+		<RestoreAdditionalProjectSources>https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet7/nuget/v3/index.json</RestoreAdditionalProjectSources>
+		<NativeAotCompilerVersion>7.0.0-*</NativeAotCompilerVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Avalonia.X11\NativeDialogs\Gtk.cs" Link="NativeControls\Gtk\Gtk.cs" />
+		<Compile Include="Avalonia.Base\Platform\Interop\Utf8Buffer.cs" Link="NativeControls\Utf8Buffer.cs" />
+		<Compile Include="Program.cs" />
+		<Compile Include="NativeControls\**\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="NativeControls\Gtk\nodes.mp4">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.LinuxFramebuffer" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Headless.Vnc" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.X11" Version="$(AvaloniaVersion)" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+		<ProjectReference Include="..\ControlCatalog\ControlCatalog.csproj" />
+		<!-- For native controls test -->
+		<PackageReference Include="MonoMac.NetStandard" Version="0.0.4" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(RunNativeAotCompilation)' == 'true'">
+		<PackageReference Include="Microsoft.DotNet.ILCompiler" Version="$(NativeAotCompilerVersion)" />
+		<!-- Cross-compilation for Windows x64-arm64 and Linux x64-arm64 -->
+		<PackageReference Condition="'$(RuntimeIdentifier)'=='win-arm64'" Include="runtime.win-x64.Microsoft.DotNet.ILCompiler" Version="$(NativeAotCompilerVersion)" />
+		<PackageReference Condition="'$(RuntimeIdentifier)'=='linux-arm64'" Include="runtime.linux-x64.Microsoft.DotNet.ILCompiler" Version="$(NativeAotCompilerVersion)" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<!-- For Microsoft.CodeAnalysis -->
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+	</PropertyGroup>
+
+</Project>
