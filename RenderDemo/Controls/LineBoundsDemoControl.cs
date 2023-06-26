@@ -1,54 +1,51 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
-
-//using Avalonia.Rendering.SceneGraph;
 using Avalonia.Threading;
 using RenderDemo.SceneGraph;
+using System;
 
-namespace RenderDemo.Controls
+namespace RenderDemo.Controls;
+
+public class LineBoundsDemoControl : Control
 {
-    public class LineBoundsDemoControl : Control
+    static LineBoundsDemoControl()
     {
-        static LineBoundsDemoControl()
-        {
-            AffectsRender<LineBoundsDemoControl>(AngleProperty);
-        }
+        AffectsRender<LineBoundsDemoControl>(AngleProperty);
+    }
 
-        public LineBoundsDemoControl()
-        {
-            var timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1 / 60.0);
-            timer.Tick += (sender, e) => Angle += Math.PI / 360;
-            timer.Start();
-        }
+    public LineBoundsDemoControl()
+    {
+        var timer = new DispatcherTimer();
+        timer.Interval = TimeSpan.FromSeconds(1 / 60.0);
+        timer.Tick += (sender, e) => Angle += Math.PI / 360;
+        timer.Start();
+    }
 
-        public static readonly StyledProperty<double> AngleProperty =
-            AvaloniaProperty.Register<LineBoundsDemoControl, double>(nameof(Angle));
+    public static readonly StyledProperty<double> AngleProperty =
+          AvaloniaProperty.Register<LineBoundsDemoControl, double>(nameof(Angle));
 
-        public double Angle
-        {
-            get => GetValue(AngleProperty);
-            set => SetValue(AngleProperty, value);
-        }
+    public double Angle
+    {
+        get => GetValue(AngleProperty);
+        set => SetValue(AngleProperty, value);
+    }
 
-        public override void Render(DrawingContext drawingContext)
-        {
-            var lineLength = Math.Sqrt((100 * 100) + (100 * 100));
+    public override void Render(DrawingContext drawingContext)
+    {
+        var lineLength = Math.Sqrt((100 * 100) + (100 * 100));
 
-            var diffX = LineBoundsHelper.CalculateAdjSide(Angle, lineLength);
-            var diffY = LineBoundsHelper.CalculateOppSide(Angle, lineLength);
+        var diffX = LineBoundsHelper.CalculateAdjSide(Angle, lineLength);
+        var diffY = LineBoundsHelper.CalculateOppSide(Angle, lineLength);
 
-            var p1 = new Point(200, 200);
-            var p2 = new Point(p1.X + diffX, p1.Y + diffY);
+        var p1 = new Point(200, 200);
+        var p2 = new Point(p1.X + diffX, p1.Y + diffY);
 
-            var pen = new Pen(Brushes.Green, 20, lineCap: PenLineCap.Square);
-            var boundPen = new Pen(Brushes.Black);
+        var pen = new Pen(Brushes.Green, 20, lineCap: PenLineCap.Square);
+        var boundPen = new Pen(Brushes.Black);
 
-            drawingContext.DrawLine(pen, p1, p2);
+        drawingContext.DrawLine(pen, p1, p2);
 
-            drawingContext.DrawRectangle(boundPen, LineBoundsHelper.CalculateBounds(p1, p2, pen));
-        }
+        drawingContext.DrawRectangle(boundPen, LineBoundsHelper.CalculateBounds(p1, p2, pen));
     }
 }

@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace RenderDemo.Pages;
 
-public partial class BrushesPage : UserControl
+public partial class SpringAnimationsPage : UserControl
 {
-    public BrushesPage()
+    public SpringAnimationsPage()
     {
         InitializeComponent();
     }

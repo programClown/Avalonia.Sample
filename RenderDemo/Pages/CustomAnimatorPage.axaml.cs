@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace RenderDemo.Pages;
 
-public class SpringAnimationsPage : UserControl
+public partial class CustomAnimatorPage : UserControl
 {
-    public SpringAnimationsPage()
+    public CustomAnimatorPage()
     {
         InitializeComponent();
     }
