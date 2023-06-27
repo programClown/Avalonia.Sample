@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Sample", "Avalonia.Sample\Avalonia.Sample.csproj", "{1A8F259A-C2C6-496C-A085-269162F952AA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Sample.Desktop", "Avalonia.Sample.Desktop\Avalonia.Sample.Desktop.csproj", "{A4E0C377-C28D-4C31-BF41-4A2FCE4AD5BF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppWithoutLifetime", "AppWithoutLifetime\AppWithoutLifetime.csproj", "{BA71C763-3EE6-4D6C-A92B-8F214996E411}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniMvvm", "MiniMvvm\MiniMvvm.csproj", "{C53BBC27-7873-4CE3-9641-88B5F0EA0ADE}"
@@ -57,14 +53,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1A8F259A-C2C6-496C-A085-269162F952AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A8F259A-C2C6-496C-A085-269162F952AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A8F259A-C2C6-496C-A085-269162F952AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A8F259A-C2C6-496C-A085-269162F952AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4E0C377-C28D-4C31-BF41-4A2FCE4AD5BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4E0C377-C28D-4C31-BF41-4A2FCE4AD5BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4E0C377-C28D-4C31-BF41-4A2FCE4AD5BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4E0C377-C28D-4C31-BF41-4A2FCE4AD5BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA71C763-3EE6-4D6C-A92B-8F214996E411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA71C763-3EE6-4D6C-A92B-8F214996E411}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA71C763-3EE6-4D6C-A92B-8F214996E411}.Release|Any CPU.ActiveCfg = Release|Any CPU
