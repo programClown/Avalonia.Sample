@@ -16,13 +16,13 @@ public partial class MainWindow : Window
         var vm = new MainWindowViewModel();
 
         void BindOverlay(Expression<Func<MainWindowViewModel, bool>> expr, RendererDebugOverlays overlay)
-            => vm.WhenAnyValue(expr).Subscribe(x =>
-            {
-                var diagnostics = RendererDiagnostics;
-                diagnostics.DebugOverlays = x ?
-                    diagnostics.DebugOverlays | overlay :
-                    diagnostics.DebugOverlays & ~overlay;
-            });
+                => vm.WhenAnyValue(expr).Subscribe(x =>
+                {
+                    var diagnostics = RendererDiagnostics;
+                    diagnostics.DebugOverlays = x ?
+                        diagnostics.DebugOverlays | overlay :
+                        diagnostics.DebugOverlays & ~overlay;
+                });
 
         BindOverlay(x => x.DrawDirtyRects, RendererDebugOverlays.DirtyRects);
         BindOverlay(x => x.DrawFps, RendererDebugOverlays.Fps);

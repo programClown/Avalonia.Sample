@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<IncludeAvaloniaGenerators>true</IncludeAvaloniaGenerators>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MiniMvvm\MiniMvvm.csproj" />
+		<ProjectReference Include="..\SampleControls\ControlSamples.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="Assets\chat.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>

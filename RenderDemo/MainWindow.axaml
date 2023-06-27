@@ -1,43 +1,48 @@
-<Window x:Class="RenderDemo.MainWindow"
-        xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:ControlSamples"
-        xmlns:pages="using:RenderDemo.Pages"
-        xmlns:viewModels="using:RenderDemo.ViewModels"
-        Title="AvaloniaUI Rendering Test"
-        x:DataType="viewModels:MainWindowViewModel"
-        Width="{Binding Width, Mode=TwoWay}"
-        Height="{Binding Height, Mode=TwoWay}">
+<Window
+    x:Class="RenderDemo.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:ControlSamples"
+    xmlns:pages="using:RenderDemo.Pages"
+    xmlns:viewModels="using:RenderDemo.ViewModels"
+    Title="AvaloniaUI Rendering Test"
+    Width="{Binding Width, Mode=TwoWay}"
+    Height="{Binding Height, Mode=TwoWay}"
+    x:DataType="viewModels:MainWindowViewModel">
 	<controls:HamburgerMenu ExpandedModeThresholdWidth="760">
 		<FlyoutBase.AttachedFlyout>
 			<MenuFlyout>
 				<MenuItem Header="Rendering">
 					<MenuItem Command="{Binding ToggleDrawDirtyRects}" Header="Draw Dirty Rects">
 						<MenuItem.Icon>
-							<CheckBox BorderThickness="0"
-									  IsChecked="{Binding DrawDirtyRects}"
-									  IsHitTestVisible="False" />
+							<CheckBox
+                                BorderThickness="0"
+                                IsChecked="{Binding DrawDirtyRects}"
+                                IsHitTestVisible="False" />
 						</MenuItem.Icon>
 					</MenuItem>
 					<MenuItem Command="{Binding ToggleDrawFps}" Header="Draw FPS">
 						<MenuItem.Icon>
-							<CheckBox BorderThickness="0"
-									  IsChecked="{Binding DrawFps}"
-									  IsHitTestVisible="False" />
+							<CheckBox
+                                BorderThickness="0"
+                                IsChecked="{Binding DrawFps}"
+                                IsHitTestVisible="False" />
 						</MenuItem.Icon>
 					</MenuItem>
 					<MenuItem Command="{Binding ToggleDrawLayoutTimeGraph}" Header="Draw layout time graph">
 						<MenuItem.Icon>
-							<CheckBox BorderThickness="0"
-									  IsChecked="{Binding DrawLayoutTimeGraph}"
-									  IsHitTestVisible="False" />
+							<CheckBox
+                                BorderThickness="0"
+                                IsChecked="{Binding DrawLayoutTimeGraph}"
+                                IsHitTestVisible="False" />
 						</MenuItem.Icon>
 					</MenuItem>
 					<MenuItem Command="{Binding ToggleDrawRenderTimeGraph}" Header="Draw render time graph">
 						<MenuItem.Icon>
-							<CheckBox BorderThickness="0"
-									  IsChecked="{Binding DrawRenderTimeGraph}"
-									  IsHitTestVisible="False" />
+							<CheckBox
+                                BorderThickness="0"
+                                IsChecked="{Binding DrawRenderTimeGraph}"
+                                IsHitTestVisible="False" />
 						</MenuItem.Icon>
 					</MenuItem>
 				</MenuItem>
