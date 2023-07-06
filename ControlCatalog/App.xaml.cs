@@ -18,7 +18,7 @@ namespace ControlCatalog
         private SimpleTheme? _simpleTheme;
         private IStyle? _colorPickerFluent, _colorPickerSimple;
         private IStyle? _dataGridFluent, _dataGridSimple;
-        
+
         public App()
         {
             DataContext = new ApplicationViewModel();
@@ -30,13 +30,13 @@ namespace ControlCatalog
 
             AvaloniaXamlLoader.Load(this);
 
-            _fluentTheme = new FluentTheme();
-            _simpleTheme = new SimpleTheme();
+            _fluentTheme = (FluentTheme)Resources["FluentTheme"]!;
+            _simpleTheme = (SimpleTheme)Resources["SimpleTheme"]!;
             _colorPickerFluent = (IStyle)Resources["ColorPickerFluent"]!;
             _colorPickerSimple = (IStyle)Resources["ColorPickerSimple"]!;
             _dataGridFluent = (IStyle)Resources["DataGridFluent"]!;
             _dataGridSimple = (IStyle)Resources["DataGridSimple"]!;
-            
+
             SetCatalogThemes(CatalogTheme.Fluent);
         }
 
@@ -55,14 +55,15 @@ namespace ControlCatalog
         }
 
         private CatalogTheme _prevTheme;
-        public static CatalogTheme CurrentTheme => ((App)Current!)._prevTheme; 
+        public static CatalogTheme CurrentTheme => ((App)Current!)._prevTheme;
+
         public static void SetCatalogThemes(CatalogTheme theme)
         {
             var app = (App)Current!;
             var prevTheme = app._prevTheme;
             app._prevTheme = theme;
             var shouldReopenWindow = prevTheme != theme;
-            
+
             if (app._themeStylesContainer.Count == 0)
             {
                 app._themeStylesContainer.Add(new Style());

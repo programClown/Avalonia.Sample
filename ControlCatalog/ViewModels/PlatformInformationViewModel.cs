@@ -11,49 +11,20 @@ public class PlatformInformationViewModel : ViewModelBase
 {
     public PlatformInformationViewModel()
     {
-        //var runtimeInfo = AvaloniaLocator.Current.GetService<IRuntimePlatform>()?.GetRuntimeInfo();
-        var runtimeInfo = new RuntimePlatformInfo
-        {
-            IsDesktop = true,
-            IsMobile = false
-        };
-
-        if (runtimeInfo is { } info)
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Create("BROWSER")))
-            {
-                if (info.IsDesktop)
-                {
-                    PlatformInfo = "Platform: Desktop (browser)";
-                }
-                else if (info.IsMobile)
-                {
-                    PlatformInfo = "Platform: Mobile (browser)";
-                }
-                else
-                {
-                    PlatformInfo = "Platform: Unknown (browser) - please report";
-                }
-            }
-            else
-            {
-                if (info.IsDesktop)
-                {
-                    PlatformInfo = "Platform: Desktop (native)";
-                }
-                else if (info.IsMobile)
-                {
-                    PlatformInfo = "Platform: Mobile (native)";
-                }
-                else
-                {
-                    PlatformInfo = "Platform: Unknown (native) - please report";
-                }
-            }
-        }
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            PlatformInfo = "Platform: OSX";
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            PlatformInfo = "Platform: Linux";
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            PlatformInfo = "Platform: Windows";
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Create("Android")))
+            PlatformInfo = "Platform: Android";
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Create("iOS")))
+            PlatformInfo = "Platform: iOS";
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Create("Browser")))
+            PlatformInfo = "Platform: Browser";
         else
-        {
-        }
+            PlatformInfo = "Unknown OS platform " + RuntimeInformation.OSDescription;
     }
 
     public string PlatformInfo { get; }

@@ -18,9 +18,9 @@ public partial class Sub : Window
     }
 
     /// <inheritdoc/>
-    protected override void OnLoaded()
+    protected override void OnLoaded(RoutedEventArgs e)
     {
         this.AttachDevTools();
-        base.OnLoaded();
+        base.OnLoaded(e);
     }
 }

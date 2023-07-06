@@ -13,7 +13,7 @@ namespace ControlCatalog.Pages
     public class GesturePage : UserControl
     {
         private bool _isInit;
-        private float _currentScale;
+        private double _currentScale;
 
         public GesturePage()
         {
@@ -29,7 +29,7 @@ namespace ControlCatalog.Pages
         {
             base.OnAttachedToVisualTree(e);
 
-            if(_isInit)
+            if (_isInit)
             {
                 return;
             }
@@ -50,15 +50,14 @@ namespace ControlCatalog.Pages
             {
                 var compositionVisual = ElementComposition.GetElementVisual(image);
 
-                if(compositionVisual!= null)
+                if (compositionVisual != null)
                 {
                     _currentScale = 1;
-                    compositionVisual.Scale = new Vector3(1,1,1);
+                    compositionVisual.Scale = new(1, 1, 1);
                     compositionVisual.Offset = default;
                     image.InvalidateMeasure();
                 }
             };
-                
         }
 
         private void SetPinchHandlers(Control? control)
@@ -69,7 +68,7 @@ namespace ControlCatalog.Pages
             }
 
             _currentScale = 1;
-            Vector3 currentOffset = default;
+            Vector3D currentOffset = default;
 
             CompositionVisual? compositionVisual = null;
 
@@ -90,7 +89,7 @@ namespace ControlCatalog.Pages
                 {
                     compositionVisual.Scale = new(_currentScale, _currentScale, 1);
 
-                    if(currentOffset == default)
+                    if (currentOffset == default)
                     {
                         currentOffset = compositionVisual.Offset;
                     }
@@ -101,7 +100,7 @@ namespace ControlCatalog.Pages
             {
                 InitComposition(control!);
 
-                if(compositionVisual != null)
+                if (compositionVisual != null)
                 {
                     var scale = _currentScale * (float)e.Scale;
 
@@ -133,11 +132,11 @@ namespace ControlCatalog.Pages
 
                 if (compositionVisual != null && _currentScale != 1)
                 {
-                    currentOffset += new Vector3((float)e.Delta.X, (float)e.Delta.Y, 0);
+                    currentOffset += new Vector3D(e.Delta.X, e.Delta.Y, 0);
 
                     var currentSize = control.Bounds.Size * _currentScale;
 
-                    currentOffset = new Vector3((float)MathUtilities.Clamp(currentOffset.X, 0, currentSize.Width - control.Bounds.Width),
+                    currentOffset = new Vector3D(MathUtilities.Clamp(currentOffset.X, 0, currentSize.Width - control.Bounds.Width),
                         (float)MathUtilities.Clamp(currentOffset.Y, 0, currentSize.Height - control.Bounds.Height),
                         0);
 
@@ -157,7 +156,7 @@ namespace ControlCatalog.Pages
 
             var ball = control.FindLogicalDescendantOfType<Border>();
 
-            Vector3 defaultOffset = default;
+            Vector3D defaultOffset = default;
 
             CompositionVisual? ballCompositionVisual = null;
 
@@ -181,11 +180,11 @@ namespace ControlCatalog.Pages
 
             control.AddHandler(Gestures.PullGestureEvent, (s, e) =>
             {
-                Vector3 center = new((float)control.Bounds.Center.X, (float)control.Bounds.Center.Y, 0);
+                Vector3D center = new((float)control.Bounds.Center.X, (float)control.Bounds.Center.Y, 0);
                 InitComposition(ball!);
                 if (ballCompositionVisual != null)
                 {
-                    ballCompositionVisual.Offset = defaultOffset + new System.Numerics.Vector3((float)e.Delta.X * 0.4f, (float)e.Delta.Y * 0.4f, 0) * (inverse ? -1 : 1);
+                    ballCompositionVisual.Offset = defaultOffset + new Vector3D(e.Delta.X * 0.4f, e.Delta.Y * 0.4f, 0) * (inverse ? -1 : 1);
 
                     e.Handled = true;
                 }

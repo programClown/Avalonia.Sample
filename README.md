@@ -1,11 +1,12 @@
 # Avalonia.Sample
-AvaloniaUI Sample 
+
+AvaloniaUI Sample , update version 11.0
 
 # Screenshots
 
 ## 1 ControlCatalog
-![](screenshots/avalonia-control-gallary.png)
 
+![](screenshots/avalonia-control-gallary.png)
 
 ## 2 VirtualizationDemo
 

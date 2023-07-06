@@ -2,7 +2,7 @@
 
 namespace RenderDemo.Pages;
 
-public class CustomStringAnimator : CustomAnimatorBase<string>
+public class CustomStringAnimator : InterpolatingAnimator<string>
 {
     public override string Interpolate(double progress, string oldValue, string newValue)
     {

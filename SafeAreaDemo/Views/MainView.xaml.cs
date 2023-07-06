@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using SafeAreaDemo.ViewModels;
 
@@ -11,9 +12,9 @@ namespace SafeAreaDemo.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-        protected override void OnLoaded()
+        protected override void OnLoaded(RoutedEventArgs e)
         {
-            base.OnLoaded();
+            base.OnLoaded(e);
 
             var insetsManager = TopLevel.GetTopLevel(this)?.InsetsManager;
             if (insetsManager != null && DataContext is MainViewModel viewModel)

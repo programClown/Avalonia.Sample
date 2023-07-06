@@ -16,11 +16,18 @@ using ControlCatalog.Pages;
 
 namespace ControlCatalog.NetCore
 {
-    static class Program
+    internal static class Program
     {
+        private static bool s_useFramebuffer;
+
         [STAThread]
-        static int Main(string[] args)
+        private static int Main(string[] args)
         {
+            if (args.Contains("--fbdev"))
+            {
+                s_useFramebuffer = true;
+            }
+
             if (args.Contains("--wait-for-attach"))
             {
                 Console.WriteLine("Attach debugger and use 'Set next statement'");
@@ -42,7 +49,7 @@ namespace ControlCatalog.NetCore
                     return scaling;
                 return 1;
             }
-            if (args.Contains("--fbdev"))
+            if (s_useFramebuffer)
             {
                 SilenceConsole();
                 return builder.StartLinuxFbDev(args, scaling: GetScaling());
@@ -103,8 +110,7 @@ namespace ControlCatalog.NetCore
             {
                 builder.With(new Win32PlatformOptions()
                 {
-                    UseLowLatencyDxgiSwapChain = true,
-                    UseWindowsUIComposition = false
+                    CompositionMode = new[] { Win32CompositionMode.LowLatencyDxgiSwapChain }
                 });
                 return builder.StartWithClassicDesktopLifetime(args);
             }
@@ -128,10 +134,13 @@ namespace ControlCatalog.NetCore
                 .WithInterFont()
                 .AfterSetup(builder =>
                 {
-                    builder.Instance!.AttachDevTools(new Avalonia.Diagnostics.DevToolsOptions()
+                    if (!s_useFramebuffer)
                     {
-                        StartupScreenIndex = 1,
-                    });
+                        builder.Instance!.AttachDevTools(new Avalonia.Diagnostics.DevToolsOptions()
+                        {
+                            StartupScreenIndex = 1,
+                        });
+                    }
 
                     EmbedSample.Implementation = OperatingSystem.IsWindows() ? (INativeDemoControl)new EmbedSampleWin()
                         : OperatingSystem.IsMacOS() ? new EmbedSampleMac()
@@ -140,7 +149,7 @@ namespace ControlCatalog.NetCore
                 })
                 .LogToTrace();
 
-        static void SilenceConsole()
+        private static void SilenceConsole()
         {
             new Thread(() =>
             {
