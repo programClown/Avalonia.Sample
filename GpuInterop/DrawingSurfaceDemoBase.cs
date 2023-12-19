@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -13,12 +12,12 @@ public abstract class DrawingSurfaceDemoBase : Control, IGpuDemo
 {
     private CompositionSurfaceVisual? _visual;
     private Compositor? _compositor;
-    private Action _update;
-    private string _info;
+    private readonly Action _update;
+    private string _info = string.Empty;
     private bool _updateQueued;
     private bool _initialized;
     
-    protected CompositionDrawingSurface Surface { get; private set; }
+    protected CompositionDrawingSurface? Surface { get; private set; }
 
     public DrawingSurfaceDemoBase()
     {
@@ -48,7 +47,7 @@ public abstract class DrawingSurfaceDemoBase : Control, IGpuDemo
             
             Surface = _compositor.CreateDrawingSurface();
             _visual = _compositor.CreateSurfaceVisual();
-            _visual.Size = new Vector2((float)Bounds.Width, (float)Bounds.Height);
+            _visual.Size = new (Bounds.Width, Bounds.Height);
             _visual.Surface = Surface;
             ElementComposition.SetElementChildVisual(this, _visual);
             var (res, info) = await DoInitialize(_compositor, Surface);
@@ -72,7 +71,7 @@ public abstract class DrawingSurfaceDemoBase : Control, IGpuDemo
         if (root == null)
             return;
         
-        _visual!.Size = new Vector2((float)Bounds.Width, (float)Bounds.Height);
+        _visual!.Size = new (Bounds.Width, Bounds.Height);
         var size = PixelSize.FromSize(Bounds.Size, root.RenderScaling);
         RenderFrame(size);
         if (SupportsDisco && Disco > 0)
@@ -113,7 +112,7 @@ public abstract class DrawingSurfaceDemoBase : Control, IGpuDemo
     protected abstract void RenderFrame(PixelSize pixelSize);
     protected virtual bool SupportsDisco => false;
 
-    public void Update(GpuDemo parent, float yaw, float pitch, float roll, float disco)
+    public void Update(GpuDemo? parent, float yaw, float pitch, float roll, float disco)
     {
         ParentControl = parent;
         if (ParentControl != null)

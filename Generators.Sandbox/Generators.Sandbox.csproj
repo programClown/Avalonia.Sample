@@ -8,7 +8,7 @@
 	<ItemGroup>
 		<AvaloniaResource Include="**\*.xaml" />
 		<!-- Note this AdditionalFiles directive. -->
-		<AdditionalFiles Include="**\*.xaml" />
+		<AdditionalFiles Include="**\*.xaml" SourceItemGroup="AvaloniaXaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -19,6 +19,6 @@
 		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
 		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
 		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
-		<PackageReference Include="ReactiveUI.Validation" Version="3.0.22" />
+		<PackageReference Include="ReactiveUI.Validation" Version="3.1.7" />
 	</ItemGroup>
 </Project>

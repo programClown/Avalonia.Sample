@@ -25,17 +25,16 @@ public class RenderTargetBitmapPage : Control
         base.OnDetachedFromLogicalTree(e);
     }
 
-    private readonly Stopwatch _st = Stopwatch.StartNew();
-
-    public override void Render(DrawingContext context)
-    {
-        using (var ctx = _bitmap.CreateDrawingContext())
-        using (ctx.PushTransform(Matrix.CreateTranslation(-100, -100)
-                                     * Matrix.CreateRotation(_st.Elapsed.TotalSeconds)
-                                     * Matrix.CreateTranslation(100, 100)))
+        readonly Stopwatch _st = Stopwatch.StartNew();
+        public override void Render(DrawingContext context)
         {
-            ctx.FillRectangle(Brushes.Fuchsia, new Rect(50, 50, 100, 100));
-        }
+            using (var ctx = _bitmap.CreateDrawingContext())
+            using (ctx.PushTransform(Matrix.CreateTranslation(-100, -100)
+                                         * Matrix.CreateRotation(_st.Elapsed.TotalSeconds)
+                                         * Matrix.CreateTranslation(100, 100)))
+            {
+                ctx.FillRectangle(Brushes.Fuchsia, new Rect(50, 50, 100, 100));
+            }
 
         context.DrawImage(_bitmap,
             new Rect(0, 0, 200, 200),

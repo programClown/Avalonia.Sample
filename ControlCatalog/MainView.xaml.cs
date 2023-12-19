@@ -22,7 +22,7 @@ namespace ControlCatalog
         public MainView()
         {
             AvaloniaXamlLoader.Load(this);
-            
+
             var sideBar = this.Get<TabControl>("Sidebar");
 
             if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
@@ -59,7 +59,7 @@ namespace ControlCatalog
             {
                 if (flowDirections.SelectedItem is FlowDirection flowDirection)
                 {
-                    TopLevel.GetTopLevel(this).FlowDirection = flowDirection;
+                    TopLevel.GetTopLevel(this)!.FlowDirection = flowDirection;
                 }
             };
 
@@ -99,7 +99,7 @@ namespace ControlCatalog
         }
 
         internal MainWindowViewModel ViewModel => (MainWindowViewModel)DataContext!;
-        
+
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
             base.OnAttachedToVisualTree(e);

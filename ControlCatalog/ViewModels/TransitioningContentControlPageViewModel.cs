@@ -46,6 +46,7 @@ namespace ControlCatalog.ViewModels
         public List<Bitmap> Images { get; } = new List<Bitmap>();
 
         private Bitmap _SelectedImage;
+        private bool _Reversed;
 
         /// <summary>
         /// Gets or Sets the selected image
@@ -96,6 +97,15 @@ namespace ControlCatalog.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the animation is reversed.
+        /// </summary>
+        public bool Reversed
+        {
+            get => _Reversed;
+            set => this.RaiseAndSetIfChanged(ref _Reversed, value);
+        }
+
         private void SetupTransitions()
         {
             if (PageTransitions.Count == 0)
@@ -126,6 +136,7 @@ namespace ControlCatalog.ViewModels
 
         public void NextImage()
         {
+            Reversed = false;
             var index = Images.IndexOf(SelectedImage) + 1;
 
             if (index >= Images.Count)
@@ -138,6 +149,7 @@ namespace ControlCatalog.ViewModels
 
         public void PrevImage()
         {
+            Reversed = true;
             var index = Images.IndexOf(SelectedImage) - 1;
 
             if (index < 0)
@@ -187,7 +199,7 @@ namespace ControlCatalog.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomTransition"/> class.
         /// </summary>
-        /// <param name="duration"> The duration of the animation. </param>
+        /// <param name="duration">The duration of the animation.</param>
         public CustomTransition(TimeSpan duration)
         {
             Duration = duration;
@@ -279,11 +291,11 @@ namespace ControlCatalog.ViewModels
         /// <summary>
         /// Gets the common visual parent of the two control.
         /// </summary>
-        /// <param name="from"> The from control. </param>
-        /// <param name="to"> The to control. </param>
-        /// <returns> The common parent. </returns>
-        /// <exception cref="ArgumentException"> The two controls do not share a common parent. </exception>
-        /// <remarks> Any one of the parameters may be null, but not both. </remarks>
+        /// <param name="from">The from control.</param>
+        /// <param name="to">The to control.</param>
+        /// <returns>The common parent.</returns>
+        /// <exception cref="ArgumentException">The two controls do not share a common parent.</exception>
+        /// <remarks>Any one of the parameters may be null, but not both.</remarks>
         private static Visual GetVisualParent(Visual? from, Visual? to)
         {
             var p1 = (from ?? to)!.GetVisualParent();

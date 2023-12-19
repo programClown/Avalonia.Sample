@@ -29,11 +29,11 @@ public class PathMeasurementPage : Control
         base.OnDetachedFromLogicalTree(e);
     }
 
-    private readonly IPen strokePen = new ImmutablePen(Brushes.DarkBlue, 10d, null, PenLineCap.Round, PenLineJoin.Round);
-    private readonly IPen strokePen1 = new ImmutablePen(Brushes.Purple, 10d, null, PenLineCap.Round, PenLineJoin.Round);
-    private readonly IPen strokePen2 = new ImmutablePen(Brushes.Green, 10d, null, PenLineCap.Round, PenLineJoin.Round);
-    private readonly IPen strokePen3 = new ImmutablePen(Brushes.LightBlue, 10d, null, PenLineCap.Round, PenLineJoin.Round);
-    private readonly IPen strokePen4 = new ImmutablePen(Brushes.Red, 1d, null, PenLineCap.Round, PenLineJoin.Round);
+        readonly IPen strokePen = new ImmutablePen(Brushes.DarkBlue, 10d, null, PenLineCap.Round, PenLineJoin.Round);
+        readonly IPen strokePen1 = new ImmutablePen(Brushes.Purple, 10d, null, PenLineCap.Round, PenLineJoin.Round);
+        readonly IPen strokePen2 = new ImmutablePen(Brushes.Green, 10d, null, PenLineCap.Round, PenLineJoin.Round);
+        readonly IPen strokePen3 = new ImmutablePen(Brushes.LightBlue, 10d, null, PenLineCap.Round, PenLineJoin.Round);
+        readonly IPen strokePen4 = new ImmutablePen(Brushes.Red, 1d, null, PenLineCap.Round, PenLineJoin.Round);
 
     public override void Render(DrawingContext context)
     {
